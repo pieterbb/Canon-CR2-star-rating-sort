@@ -14,9 +14,10 @@ from itertools import groupby
 def return_date_from_raw(filepath):
     # Extract the EXIF information from a Canon RAW CR2 file and return a date.
     f = open(filepath, 'rb')
-    data = exifread.process_file(f, details=False, stop_tag='DateTimeOriginal')
+    # , stop_tag='DateTimeOriginal')
+    data = exifread.process_file(f, details=False)
     f.close()
-    date_str = data['EXIF DateTimeOriginal'].values
+    date_str = data.values
 
     # Parse the RAW date string into a date time object for calculations
     parse_date = datetime.datetime.strptime(date_str, '%Y:%m:%d %H:%M:%S')
@@ -102,7 +103,7 @@ def cat_algo(folder):
             previous_date_stamp = item[1]
 
         # To help make sure this is not the first image in the sequence.
-        item_count += 1
+            item_count += 1
 
     print cr2_category
 
@@ -117,7 +118,6 @@ def main():
 
     input_folder = raw_input("\n Drag in your input folder and press enter: ")
     # output_folder = input("\n Drag in your output folder and press enter: ")
-    #input_folder = "/Users/Kevin/Downloads/Jack\ Script/Day\ 2\ copy"
     input_folder = input_folder.replace("\\", "") + "/"
     print input_folder
     output_folder = input_folder
