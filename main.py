@@ -1,7 +1,9 @@
 # Python 2.7 for compatibility with EXIFRead. Sigh...
 # ctrl - alt - n for running
-# Start with virtualenv next time
-# Don't use it as offload tool. But for folder sort only.
+# Todo: Remove output folder, move photo's instead from the folder its in.
+# Todo: Port to virtualenv. to keep dependencies consistent
+# Todo: Doublecheck the files is closed in the read method so it doesn't hog up memory
+
 
 import exifread  # External Library
 import os
@@ -17,7 +19,6 @@ from bs4 import BeautifulSoup
 
 def return_star_rating(filepath):
      # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
-     # Todo: Close the file so it doesn't hog up memory
     with open(filepath, "rb") as file:
         img = file.read()
     imgAsString = str(img)
@@ -33,12 +34,12 @@ def return_star_rating(filepath):
 
 
 def move_photos_to_folders(cr2_category):
-    # iterate over the CR2 items and create the right file paths
+    # iterate over the photos and create the right file path
     for item, key in cr2_category.iteritems():
         if not os.path.exists(input_folder + "/" + str(key)):
             os.makedirs(input_folder + "/" + str(key))
 
-        # Move the CR2 items
+        # Move the photos
         file_name = re.search("\/([^\/]+)$", item)
         shutil.move(input_folder + "/" + file_name.group(1), output_folder + "/" +
                     str(key) + "/" + file_name.group(1))
@@ -46,9 +47,9 @@ def move_photos_to_folders(cr2_category):
 
 def folder_to_filelist(folder_path):
     print "Scanning: " + str(folder_path)
-    # Scan folder for CR2 files and return full file filepath.
+    # Scan folder for CR2 Photos files and return full file filepath.
     file_list = []
-    # Only add CR2 files to the list
+    # Only add CR2 photo files to the list
     for name in sorted(glob.iglob(folder_path + '/*.CR2')):
         file_list.append(name)
         print(name)
