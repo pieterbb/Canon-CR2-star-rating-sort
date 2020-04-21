@@ -9,7 +9,8 @@ from bs4 import BeautifulSoup
 
 
 def return_star_rating(filepath):
-     # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
+    # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
+    # Canon Stores star rating in additional XMP not EXIF
     with open(filepath, "rb") as file:
         img = file.read()
     imgAsString = str(img)
