@@ -1,6 +1,8 @@
 xmp_reading.py
 Project-Settings.code-workspace
-/.vscode
+launch.json
+setings.json
 /env
 /build
 *.spec
+__pycache__/main.cpython-37.pyc
