@@ -6,6 +6,12 @@ from pathlib import Path
 #TODO: Support for network drives? 
 #TODO: Check if an CR2 of which the rating can't be read is handled without crashing
 #TODO: Find out a better way to drag in filepaths in Windows with spaces and weird characters
+#BUG: Only start if an actual path has been entered (otherwise starts from root). Validate it is an actual directory.
+#BUG: Remove trailing space in OSX when you drag in a filepath. 
+
+#Feature:
+# Add flag for sort by rate/unrated or rating number
+# Add multiple file formats
 
 # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
 def return_star_rating(filepath):
@@ -19,7 +25,7 @@ def return_star_rating(filepath):
                 else:
                     star_rating = "?"
                 return (star_rating)
-
+                
 def process_folder(folder):
     file_list = []
 
@@ -55,16 +61,25 @@ def process_folder(folder):
 
 
 def main():
-    print("""\
-                
-██████╗░░█████╗░██████╗░██╗  ░██████╗████████╗░█████╗░██████╗░██████╗░███████╗░█████╗░░█████╗░██╗░░██╗
-██╔══██╗██╔══██╗██╔══██╗██║  ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗██║░░██║
-██████╔╝███████║██████╔╝██║  ╚█████╗░░░░██║░░░███████║██████╔╝██████╦╝█████╗░░███████║██║░░╚═╝███████║
-██╔═══╝░██╔══██║██╔═══╝░██║  ░╚═══██╗░░░██║░░░██╔══██║██╔══██╗██╔══██╗██╔══╝░░██╔══██║██║░░██╗██╔══██║
-██║░░░░░██║░░██║██║░░░░░██║  ██████╔╝░░░██║░░░██║░░██║██║░░██║██████╦╝███████╗██║░░██║╚█████╔╝██║░░██║
-╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝
-Canon CR2 RatingSort: Sort photo's in folder by rated and unrated V.02
-    """)
+    print("""\n
+'########:::::'###::::'########:'####:'##::: ##::'######:::::: 
+ ##.... ##:::'## ##:::... ##..::. ##:: ###:: ##:'##... ##::::: 
+ ##:::: ##::'##:. ##::::: ##::::: ##:: ####: ##: ##:::..:::::: 
+ ########::'##:::. ##:::: ##::::: ##:: ## ## ##: ##::'####:::: 
+ ##.. ##::: #########:::: ##::::: ##:: ##. ####: ##::: ##::::: 
+ ##::. ##:: ##.... ##:::: ##::::: ##:: ##:. ###: ##::: ##::::: 
+ ##:::. ##: ##:::: ##:::: ##::::'####: ##::. ##:. ######:::::: 
+..:::::..::..:::::..:::::..:::::....::..::::..:::......::::::: 
+:'######:::'#######::'########::'########:'########:'########::
+'##... ##:'##.... ##: ##.... ##:... ##..:: ##.....:: ##.... ##:
+ ##:::..:: ##:::: ##: ##:::: ##:::: ##:::: ##::::::: ##:::: ##:
+. ######:: ##:::: ##: ########::::: ##:::: ######::: ########::
+:..... ##: ##:::: ##: ##.. ##:::::: ##:::: ##...:::: ##.. ##:::
+'##::: ##: ##:::: ##: ##::. ##::::: ##:::: ##::::::: ##::. ##::
+. ######::. #######:: ##:::. ##:::: ##:::: ########: ##:::. ##:
+:......::::.......:::..:::::..:::::..:::::........::..:::::..::
+\nSort Canon CR2 photo's by moving them in \nstar rated or unrated folders. (V1.02 - 2020) \nContact: hello@piet.re
+""")
     global input_folder
     #input_folder = Path("")
     input_folder = Path(input("Paste the path to your input folder and press enter: "))

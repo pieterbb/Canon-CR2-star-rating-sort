@@ -6,3 +6,5 @@ setings.json
 /build
 *.spec
 __pycache__/main.cpython-37.pyc
+.vscode/settings.json
+.vscode/settings.json
