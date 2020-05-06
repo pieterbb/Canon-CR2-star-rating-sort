@@ -3,15 +3,10 @@ import re
 import glob
 from pathlib import Path
 
-#TODO: Support for network drives? 
-#TODO: Check if an CR2 of which the rating can't be read is handled without crashing
-#TODO: Find out a better way to drag in filepaths in Windows with spaces and weird characters
-#BUG: Only start if an actual path has been entered (otherwise starts from root). Validate it is an actual directory.
-#BUG: Remove trailing space in OSX when you drag in a filepath. 
+# TODO: Find out a better way to drag in filepaths in Windows with spaces and weird characters
+# TODO: Add flag for sort by rate/unrated or rating number
+# TODO: Add support for multiple file formats
 
-#Feature:
-# Add flag for sort by rate/unrated or rating number
-# Add multiple file formats
 
 # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
 def return_star_rating(filepath):
@@ -81,9 +76,12 @@ def main():
 \nSort Canon CR2 photo's by moving them in \nstar rated or unrated folders. (V1.02 - 2020) \nContact: hello@piet.re
 """)
     global input_folder
-    #input_folder = Path("")
     input_folder = Path(input("Paste the path to your input folder and press enter: "))
-    process_folder(input_folder)
-    input("Done! Press enter to exit...")
+
+    if input_folder.is_dir():
+        process_folder(input_folder)
+        input("Done! Press enter to exit...")
+    else:
+        input("Input directory does not exist...")
 
 main()
