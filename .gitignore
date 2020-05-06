@@ -1,0 +1,10 @@
+xmp_reading.py
+Project-Settings.code-workspace
+launch.json
+setings.json
+/env
+/build
+*.spec
+__pycache__/main.cpython-37.pyc
+.vscode/settings.json
+.vscode/settings.json
