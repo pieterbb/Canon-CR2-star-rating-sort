@@ -85,7 +85,8 @@ def main():
             input("Done! Press enter to exit...")
         else:
             input("Input directory does not exist...")
-    except:
+    except Exception as e:
+        print("Error Code: " + str(e))
         input("Input directory can't be read. Is it formatted correctly or does it contain special characters?")
 
 main()
