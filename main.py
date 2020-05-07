@@ -8,6 +8,7 @@ from pathlib import Path
 # TODO: Add support for multiple file formats
 
 
+
 # Extract the XMP data from the Canon RAW CR2 file and return the star rating.
 def return_star_rating(filepath):
     with open(filepath, "rb") as file:
@@ -78,10 +79,13 @@ def main():
     global input_folder
     input_folder = Path(input("Paste the path to your input folder and press enter: "))
 
-    if input_folder.is_dir():
-        process_folder(input_folder)
-        input("Done! Press enter to exit...")
-    else:
-        input("Input directory does not exist...")
+    try:
+        if input_folder.is_dir():
+            process_folder(input_folder)
+            input("Done! Press enter to exit...")
+        else:
+            input("Input directory does not exist...")
+    except:
+        input("Input directory can't be read. Is it formatted correctly or does it contain special characters?")
 
 main()
